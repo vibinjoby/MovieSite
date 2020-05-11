@@ -1,22 +1,24 @@
 import React from "react";
 import "./App.css";
 import AppBar from "./components/AppBar";
-import MoviePreviewBanner from "./components/moviePreviewBanner";
+import PreviewBanner from "./components/previewBanner";
 
 function App() {
   return (
     <React.Fragment>
       <AppBar />
-      <MoviePreviewBanner movieType="popular" movieHeader="Popular Movies" />
-      <MoviePreviewBanner
+      <PreviewBanner
+        movieType="popular"
+        movieHeader="What's Popular"
+        tvShows="Y"
+      />
+      <PreviewBanner
         movieType="top_rated"
-        movieHeader="Top Rated Movies"
+        movieHeader="What's Top Rated"
+        tvShows="Y"
       />
-      <MoviePreviewBanner movieType="upcoming" movieHeader="Upcoming Movies" />
-      <MoviePreviewBanner
-        movieType="now_playing"
-        movieHeader="Now Playing Movies"
-      />
+      <PreviewBanner movieType="upcoming" movieHeader="What's Upcoming" />
+      <PreviewBanner movieType="now_playing" movieHeader="What's Now Playing" />
     </React.Fragment>
   );
 }

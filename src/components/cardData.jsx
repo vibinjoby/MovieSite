@@ -6,25 +6,29 @@ const useStyles = makeStyles({
   root: {
     flexFlow: "row",
     paddingLeft: 20,
-    overflow: "auto"
-  },
-  item: {}
+    overflow: "auto",
+    backgroundColor: "#DCDCDC"
+  }
 });
-export default function CardMovies(props) {
+export default function CardData(props) {
   const classes = useStyles();
-  const { movies } = props;
+  const { contents, type } = props;
+  if (type !== 0) console.log(contents);
   return (
     <Grid container spacing={3} className={classes.root}>
-      {movies
-        ? movies.map(movie => (
-            <Grid item key={movie.id} className={classes.item}>
+      {contents
+        ? contents.map(content => (
+            <Grid item key={content.id} className={classes.item}>
               <Card>
                 <CardMedia>
                   <img
-                    src={`http://image.tmdb.org/t/p/w185${movie.poster_path}`}
+                    src={`http://image.tmdb.org/t/p/w185${content.poster_path}`}
+                    alt="data poster"
                   ></img>
                 </CardMedia>
-                <CardContent>{movie.title}</CardContent>
+                <CardContent>
+                  {type === 0 ? content.title : content.name}
+                </CardContent>
               </Card>
             </Grid>
           ))

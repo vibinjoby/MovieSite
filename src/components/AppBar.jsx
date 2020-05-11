@@ -16,7 +16,7 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky">
+      <AppBar position="sticky" style={{ backgroundColor: "#14213D" }}>
         <Toolbar>
           <Button color="inherit">
             <Typography variant="h6">Movies</Typography>
