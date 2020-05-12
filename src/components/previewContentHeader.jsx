@@ -4,7 +4,7 @@ import { Grid, Typography, Box } from "@material-ui/core";
 export function PreviewContentHeader(props) {
   const { contents, type } = props;
   const releaseDate =
-    type === 0
+    type === "movie"
       ? contents.release_date
         ? contents.release_date.split("-")[0]
         : ""
@@ -30,7 +30,8 @@ export function PreviewContentHeader(props) {
         )}
         <Grid item xs style={{ paddingTop: 50, paddingRight: 200 }}>
           <Typography variant="h4">
-            {contents.title}({releaseDate})
+            {type === "movie" ? contents.title : contents.original_name}(
+            {releaseDate})
           </Typography>
           <Typography variant="h5">
             {genres.join()} {contents.runtime}m
