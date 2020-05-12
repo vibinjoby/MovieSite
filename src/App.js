@@ -1,24 +1,25 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./App.css";
 import AppBar from "./components/AppBar";
-import PreviewBanner from "./components/previewBanner";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PreviewContent from "./components/previewContent";
+import Home from "./components/home";
+import ScrollToTop from "./components/scrollToTop";
 
 function App() {
   return (
     <React.Fragment>
       <AppBar />
-      <PreviewBanner
-        movieType="popular"
-        movieHeader="What's Popular"
-        tvShows="Y"
-      />
-      <PreviewBanner
-        movieType="top_rated"
-        movieHeader="What's Top Rated"
-        tvShows="Y"
-      />
-      <PreviewBanner movieType="upcoming" movieHeader="What's Upcoming" />
-      <PreviewBanner movieType="now_playing" movieHeader="What's Now Playing" />
+      <BrowserRouter>
+        <Fragment>
+          <ScrollToTop />
+          <Switch>
+            <Route path="/content/:type/:id" component={PreviewContent} />
+            <Route path="/movies" component={Home} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </Fragment>
+      </BrowserRouter>
     </React.Fragment>
   );
 }

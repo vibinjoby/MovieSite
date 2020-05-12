@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   padding: {
     padding: theme.spacing(3)
   },
-  demo2: {
+  tabs: {
     backgroundColor: "#E5E5E5",
     marginTop: 20
   }
@@ -52,7 +52,6 @@ export default function PreviewBanner(props) {
   const [contentType, setContentType] = useState(0);
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setContentType(newValue);
   };
   useEffect(() => {
@@ -62,14 +61,14 @@ export default function PreviewBanner(props) {
       setContent(data.results);
     }
     updateContent(contentType);
-  });
+  }, [contentType, type]);
 
   return (
     <React.Fragment>
       <Typography variant="h5" style={{ paddingLeft: 20, marginTop: 20 }}>
         {props.movieHeader}
       </Typography>
-      <div className={classes.demo2}>
+      <div className={classes.tabs}>
         <StyledTabs
           value={contentType}
           onChange={handleChange}

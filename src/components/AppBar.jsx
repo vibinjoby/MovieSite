@@ -18,7 +18,7 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="sticky" style={{ backgroundColor: "#14213D" }}>
         <Toolbar>
-          <Button color="inherit">
+          <Button color="inherit" onClick={() => (window.location = "/")}>
             <Typography variant="h6">Movies</Typography>
           </Button>
         </Toolbar>
