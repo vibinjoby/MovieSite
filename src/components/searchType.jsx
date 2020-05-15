@@ -8,7 +8,8 @@ import {
   Typography,
   Box,
   Paper,
-  Badge
+  Badge,
+  Card
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +35,7 @@ export default function SearchType(props) {
     <div style={{ marginLeft: 50 }}>
       <Grid container style={{ flexFlow: "column", width: "100%" }}>
         <Grid item>
-          <Paper className={classes.paper}>
+          <Card className={classes.paper}>
             <List
               style={{
                 backgroundColor: "#53adcb",
@@ -83,7 +84,7 @@ export default function SearchType(props) {
                 </ListItemText>
               </ListItem>
             </List>
-          </Paper>
+          </Card>
         </Grid>
       </Grid>
     </div>

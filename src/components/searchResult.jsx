@@ -1,8 +1,34 @@
 import React from "react";
-import { Grid, Typography, Box, Paper } from "@material-ui/core";
+import { Grid, Typography, Box, makeStyles, Card } from "@material-ui/core";
 import DefaultImg from "./defaultImg";
 
+const useStyles = makeStyles(theme => ({
+  container: {
+    position: "relative",
+    width: "90%",
+    cursor: "pointer",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 50,
+      flexflow: "column"
+    }
+  },
+  indivContainer: {
+    flexFlow: "row"
+  },
+  cardContainer: {
+    position: "relative",
+    padding: "10px",
+    marginTop: 20,
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      width: "auto",
+      paddingRight: 100
+    }
+  }
+}));
+
 export default function SearchResult(props) {
+  const classes = useStyles();
   let { contents, filteredData } = props;
   if (filteredData) {
     contents = [...filteredData];
@@ -10,64 +36,64 @@ export default function SearchResult(props) {
   if (contents.length === 0 && filteredData.length === 0)
     return <p>There are no movies that matched your query.</p>;
   return (
-    <div style={{ marginRight: 50 }}>
-      <Grid container direction="row" spacing={5}>
+    <div>
+      <Grid container spacing={5} className={classes.container}>
         {contents.map(content => (
-          <React.Fragment key={content.id}>
-            <Grid item>
-              {content.poster_path && (
-                <img
-                  src={`http://image.tmdb.org/t/p/w154${content.poster_path}`}
-                  alt="data poster"
-                  onClick={() =>
-                    (window.location = `/content/${content.media_type}/${content.id}`)
-                  }
-                  style={{ cursor: "pointer" }}
-                ></img>
-              )}
-              {!content.poster_path && (
-                <DefaultImg media_type={content.media_type} id={content.id} />
-              )}
-            </Grid>
-            <Paper
-              elevation={5}
-              style={{
-                width: "80%",
-                paddingTop: 20,
-                paddingLeft: 20,
-                marginTop: 20,
-                marginBottom: 20
-              }}
-            >
-              <Grid item>
-                <Grid container spacing={2} direction="column">
-                  <Grid item>
-                    <Box>
-                      {content.media_type === "movie"
-                        ? content.title
-                        : content.name}
-                    </Box>
-                  </Grid>
-                  <Grid item>
-                    <Box>
-                      {content.media_type === "movie"
-                        ? content.release_date
-                        : content.first_air_date}
-                    </Box>
-                  </Grid>
-                  <Grid item>
-                    <Typography component="div">
+          <Card
+            key={content.id}
+            elevation={5}
+            className={classes.cardContainer}
+            onClick={() =>
+              (window.location = `/content/${content.media_type}/${content.id}`)
+            }
+          >
+            <Grid item md>
+              <Grid container spacing={2} className={classes.indivContainer}>
+                <Grid item>
+                  {content.poster_path && (
+                    <img
+                      src={`http://image.tmdb.org/t/p/w92${content.poster_path}`}
+                      alt="data poster"
+                    ></img>
+                  )}
+                  {!content.poster_path && (
+                    <DefaultImg
+                      media_type={content.media_type}
+                      id={content.id}
+                    />
+                  )}
+                </Grid>
+
+                <Grid item md>
+                  <Grid container spacing={2} direction="column">
+                    <Grid item>
                       <Box>
-                        {content.overview
-                          ? content.overview.substring(0, 500)
-                          : "No Overview"}
+                        {content.media_type === "movie"
+                          ? content.title
+                          : content.name}
                       </Box>
-                    </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Box>
+                        {content.media_type === "movie"
+                          ? content.release_date
+                          : content.first_air_date}
+                      </Box>
+                    </Grid>
+                    <Grid item>
+                      <Typography component="div">
+                        <Box fontSize={15}>
+                          {content.overview
+                            ? content.overview.substring(0, 500)
+                            : "No Overview"}
+                        </Box>
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Paper>
-          </React.Fragment>
+            </Grid>
+          </Card>
         ))}
       </Grid>
     </div>

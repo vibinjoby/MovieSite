@@ -7,17 +7,22 @@ export default function DefaultImg(props) {
     <div
       style={{
         backgroundColor: "#C0C0C0",
-        height: 200,
-        width: 140,
-        paddingTop: 20,
-        paddingLeft: 20
+        height: 130,
+        width: 90,
+        textAlign: "center",
+        lineHeight: "120px",
+        position: "relative"
       }}
     >
       <img
         src={defaultImg}
         alt="default pic"
         onClick={() => (window.location = `/content/${media_type}/${id}`)}
-        style={{ cursor: "pointer" }}
+        style={{
+          verticalAlign: "middle",
+          width: "50px",
+          height: "50px"
+        }}
       />
     </div>
   );

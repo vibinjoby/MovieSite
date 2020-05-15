@@ -40,9 +40,11 @@ export default function Recommendations(props) {
   });
   return (
     <div className={classes.header}>
-      <Typography variant="h5" style={{ marginTop: 20 }}>
-        <Box fontWeight="fontWeightMedium">Recommendations</Box>
-      </Typography>
+      {recommendedMvies.length > 0 && (
+        <Typography variant="h5" style={{ marginTop: 20 }}>
+          <Box fontWeight="fontWeightMedium">Recommendations</Box>
+        </Typography>
+      )}
       <Grid container spacing={3} className={classes.root}>
         {recommendedMvies.length > 0
           ? recommendedMvies.map(movies => (

@@ -3,8 +3,21 @@ import SearchType from "./searchType";
 import { Grid } from "@material-ui/core";
 import SearchResult from "./searchResult";
 import { getMultiSearchResults } from "../services/moviesService";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    flexFlow: "row",
+    marginTop: 100,
+    [theme.breakpoints.down("sm")]: {
+      width: "50%",
+      flexFlow: "column"
+    }
+  }
+}));
 
 export default function SearchComponent(props) {
+  const classes = useStyles();
   const [searchData, setSearchData] = useState([]);
   const search = props.match.params.query;
   let moviesArr = [];
@@ -45,7 +58,7 @@ export default function SearchComponent(props) {
     if (searchData.length === 0) getSearchData();
   });
   return (
-    <Grid container style={{ flexFlow: "row", marginTop: 100 }} spacing={7}>
+    <Grid container className={classes.container} spacing={7}>
       <Grid item>
         <SearchType
           movies={moviesData}
