@@ -27,10 +27,18 @@ const useStyles = makeStyles(theme => ({
     top: "20px"
   },
   videoPlayer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 80,
     marginLeft: 80,
     [theme.breakpoints.down("sm")]: {
       marginLeft: 20
     }
+  },
+  playerWrapper: {
+    position: "relative",
+    paddingTop: "56.25%"
   }
 }));
 
@@ -77,9 +85,16 @@ export default function PreviewContent(props) {
           <CastCrew id={contents.id} type={type} />
         </Grid>
       )}
-      {videoUrl && (
-        <ReactPlayer url={videoUrl} className={classes.videoPlayer} />
-      )}
+      <div className={classes.playerWrapper}>
+        {videoUrl && (
+          <ReactPlayer
+            url={videoUrl}
+            className={classes.videoPlayer}
+            width="90%"
+            height="100%"
+          />
+        )}
+      </div>
       <Recommendations id={contents.id} type={type} />
     </div>
   );

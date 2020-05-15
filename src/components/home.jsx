@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     color: "inherit",
     width: "100%",
     [theme.breakpoints.down("sm")]: {
-      width: 280
+      width: 270
     }
   },
   inputInput: {
@@ -69,8 +69,9 @@ const useStyles = makeStyles(theme => ({
     left: "140px",
     width: "80%",
     [theme.breakpoints.down("sm")]: {
-      top: 100,
-      left: 20
+      top: 60,
+      left: 20,
+      width: "100%"
     }
   }
 }));
@@ -98,7 +99,7 @@ export default function Home() {
             </Box>
           </Typography>
           <br></br>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item md>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>

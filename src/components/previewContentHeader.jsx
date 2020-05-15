@@ -1,7 +1,19 @@
 import React from "react";
-import { Grid, Typography, Box } from "@material-ui/core";
+import { Grid, Typography, Box, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  header: {
+    marginLeft: 80,
+    marginRight: 50,
+    marginTop: 80,
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 20
+    }
+  }
+}));
 
 export function PreviewContentHeader(props) {
+  const classes = useStyles();
   const { contents, type } = props;
   const releaseDate =
     type === "movie"
@@ -18,7 +30,7 @@ export function PreviewContentHeader(props) {
     });
   }
   return (
-    <div style={{ marginLeft: 80, marginRight: 50, marginTop: 80 }}>
+    <div className={classes.header}>
       <Grid container spacing={3} direction="row" style={{ paddingTop: 20 }}>
         {contents.poster_path && (
           <Grid item>
