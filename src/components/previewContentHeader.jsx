@@ -18,7 +18,7 @@ export function PreviewContentHeader(props) {
     });
   }
   return (
-    <div style={{ marginLeft: 80, marginRight: 50 }}>
+    <div style={{ marginLeft: 80, marginRight: 50, marginTop: 80 }}>
       <Grid container spacing={3} direction="row" style={{ paddingTop: 20 }}>
         {contents.poster_path && (
           <Grid item>

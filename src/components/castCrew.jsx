@@ -10,14 +10,22 @@ import {
 import { getCredits } from "../services/moviesService";
 import { makeStyles } from "@material-ui/core/styles";
 
-const styles = makeStyles({
+const styles = makeStyles(theme => ({
   root: {
     flexFlow: "row",
     overflow: "auto",
     marginTop: 20,
     marginBottom: 30
+  },
+  header: {
+    marginLeft: 80,
+    marginRight: 50,
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 20,
+      marginRight: 0
+    }
   }
-});
+}));
 
 export default function CastCrew(props) {
   const { id, type } = props;
@@ -32,7 +40,7 @@ export default function CastCrew(props) {
     getCreditsData();
   });
   return (
-    <div style={{ marginLeft: 80, marginRight: 50 }}>
+    <div className={classes.header}>
       <Typography variant="h5" style={{ marginTop: 20 }}>
         <Box fontWeight="fontWeightMedium">Cast and Crew</Box>
       </Typography>

@@ -41,7 +41,22 @@ const useStyles = makeStyles(theme => ({
   },
   tabs: {
     backgroundColor: "#E5E5E5",
-    marginTop: 20
+    marginTop: 20,
+    marginRight: -25
+  },
+  cardContent: {
+    marginTop: 10,
+    marginLeft: 80,
+    marginRight: 100,
+    [theme.breakpoints.down("sm")]: {
+      margin: 0
+    }
+  },
+  cardHeader: {
+    marginTop: 20,
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 10
+    }
   }
 }));
 
@@ -64,8 +79,8 @@ export default function PreviewBanner(props) {
   }, [contentType, type]);
 
   return (
-    <React.Fragment>
-      <Typography variant="h5" style={{ paddingLeft: 20, marginTop: 20 }}>
+    <div className={classes.cardContent}>
+      <Typography variant="h5" className={classes.cardHeader}>
         {props.movieHeader}
       </Typography>
       <div className={classes.tabs}>
@@ -80,6 +95,6 @@ export default function PreviewBanner(props) {
         <Typography className={classes.padding} />
       </div>
       <CardData contents={content} type={contentType} />
-    </React.Fragment>
+    </div>
   );
 }

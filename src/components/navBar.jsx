@@ -11,15 +11,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ButtonAppBar() {
+export default function NavBar() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky" style={{ backgroundColor: "#14213D" }}>
+      <AppBar position="fixed" style={{ backgroundColor: "#14213D" }}>
         <Toolbar>
           <Button color="inherit" onClick={() => (window.location = "/")}>
-            <Typography variant="h6">Movies</Typography>
+            <Typography variant="h6">Movies </Typography>
           </Button>
         </Toolbar>
       </AppBar>

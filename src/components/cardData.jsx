@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     flexFlow: "row",
-    paddingLeft: 20,
+    marginLeft: 0,
+    marginRight: 100,
     overflow: "auto",
-    backgroundColor: "#DCDCDC"
+    backgroundColor: "#DCDCDC",
+    paddingBottom: 20
   }
 });
 export default function CardData(props) {
@@ -18,7 +20,7 @@ export default function CardData(props) {
     <Grid container spacing={3} className={classes.root}>
       {contents
         ? contents.map(content => (
-            <Grid item key={content.id} className={classes.item}>
+            <Grid item key={content.id}>
               <Card style={{ height: "100%" }}>
                 <CardMedia>
                   <Link

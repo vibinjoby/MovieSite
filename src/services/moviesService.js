@@ -44,3 +44,10 @@ export async function getRecommendations(id, type) {
   );
   return data;
 }
+
+export async function getMultiSearchResults(search) {
+  const { data } = await axios.get(
+    `${apiEndPoint}/search/multi?api_key=${apiKey}&language=en-US&query=${search}&page=1&include_adult=false`
+  );
+  return data;
+}

@@ -1,31 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { getVideoId, getMovieContents } from "../services/moviesService";
 import ReactPlayer from "react-player";
-import { CardMedia, Card, Grid } from "@material-ui/core";
+import { CardMedia, Card, Grid, makeStyles } from "@material-ui/core";
 import { PreviewContentHeader } from "./previewContentHeader";
 import CastCrew from "./castCrew";
 import Recommendations from "./recommendations";
+
+const useStyles = makeStyles(theme => ({
+  media: {
+    height: 0,
+    paddingTop: "56.25%",
+    opacity: 0.4,
+    [theme.breakpoints.down("sm")]: {
+      height: 400
+    }
+  },
+  card: {
+    height: 700,
+    position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      height: 600
+    }
+  },
+  overlay: {
+    position: "absolute",
+    top: "20px"
+  },
+  videoPlayer: {
+    marginLeft: 80,
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 20
+    }
+  }
+}));
 
 export default function PreviewContent(props) {
   const [videoUrl, setUrl] = useState("");
   const [contents, setContents] = useState({});
   const id = props.match.params.id;
   const type = props.match.params.type;
-  const styles = {
-    media: {
-      height: 0,
-      paddingTop: "56.25%",
-      opacity: 0.4
-    },
-    card: {
-      height: 550,
-      position: "relative"
-    },
-    overlay: {
-      position: "absolute",
-      top: "20px"
-    }
-  };
+  const classes = useStyles();
   useEffect(() => {
     async function getVideoUrl() {
       const { results } = await getVideoId(type, id);
@@ -34,7 +48,6 @@ export default function PreviewContent(props) {
       }
     }
     async function getContents() {
-      console.log(type);
       const data = await getMovieContents(id, type);
       setContents(data);
     }
@@ -47,14 +60,14 @@ export default function PreviewContent(props) {
   });
   return (
     <div>
-      <Card style={styles.card}>
+      <Card className={classes.card}>
         {contents.backdrop_path && (
           <CardMedia
             image={`http://image.tmdb.org/t/p/w1280${contents.backdrop_path}`}
-            style={styles.media}
+            className={classes.media}
           />
         )}
-        <div style={styles.overlay}>
+        <div className={classes.overlay}>
           <PreviewContentHeader contents={contents} type={type} />
         </div>
       </Card>
@@ -64,7 +77,9 @@ export default function PreviewContent(props) {
           <CastCrew id={contents.id} type={type} />
         </Grid>
       )}
-      {videoUrl && <ReactPlayer url={videoUrl} style={{ marginLeft: 80 }} />}
+      {videoUrl && (
+        <ReactPlayer url={videoUrl} className={classes.videoPlayer} />
+      )}
       <Recommendations id={contents.id} type={type} />
     </div>
   );
