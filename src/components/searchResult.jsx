@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     width: "90%",
     cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
-      marginLeft: 50,
+      marginLeft: 10,
       flexflow: "column",
       width: "300%"
     }

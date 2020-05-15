@@ -31,7 +31,7 @@ export default function SearchType(props) {
   const [selected, setSelected] = useState("movies");
   const { tv, movies, onSearchClick } = props;
   return (
-    <div style={{ marginLeft: 50 }}>
+    <div style={{ marginLeft: 10 }}>
       <Grid container style={{ flexFlow: "column" }}>
         <Grid item>
           <Card className={classes.paper}>
