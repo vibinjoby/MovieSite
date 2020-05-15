@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
       marginLeft: 50,
-      flexflow: "column"
+      flexflow: "column",
+      width: "300%"
     }
   },
   indivContainer: {
@@ -18,12 +19,26 @@ const useStyles = makeStyles(theme => ({
   cardContainer: {
     position: "relative",
     padding: "10px",
-    marginTop: 20,
+    marginTop: 30,
     width: "100%",
     [theme.breakpoints.down("sm")]: {
-      width: "auto",
-      paddingRight: 100
+      width: 400
     }
+  },
+  releaseDate: {
+    fontSize: "12px",
+    color: "#696969",
+    fontWeight: 800
+  },
+  overview: {
+    fontSize: "14px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "10px"
+    }
+  },
+  title: {
+    fontSize: "16px",
+    fontWeight: 800
   }
 }));
 
@@ -37,8 +52,8 @@ export default function SearchResult(props) {
     return <p>There are no movies that matched your query.</p>;
   return (
     <div>
-      <Grid container spacing={5} className={classes.container}>
-        {contents.map(content => (
+      {contents.map(content => (
+        <Grid container spacing={5} className={classes.container}>
           <Card
             key={content.id}
             elevation={5}
@@ -67,22 +82,22 @@ export default function SearchResult(props) {
                 <Grid item md>
                   <Grid container spacing={2} direction="column">
                     <Grid item>
-                      <Box>
+                      <Box className={classes.title}>
                         {content.media_type === "movie"
                           ? content.title
                           : content.name}
                       </Box>
                     </Grid>
                     <Grid item>
-                      <Box>
+                      <Box className={classes.releaseDate}>
                         {content.media_type === "movie"
-                          ? content.release_date
-                          : content.first_air_date}
+                          ? new Date(content.release_date).toDateString()
+                          : new Date(content.first_air_date).toDateString()}
                       </Box>
                     </Grid>
                     <Grid item>
                       <Typography component="div">
-                        <Box fontSize={15}>
+                        <Box className={classes.overview}>
                           {content.overview
                             ? content.overview.substring(0, 500)
                             : "No Overview"}
@@ -94,8 +109,8 @@ export default function SearchResult(props) {
               </Grid>
             </Grid>
           </Card>
-        ))}
-      </Grid>
+        </Grid>
+      ))}
     </div>
   );
 }

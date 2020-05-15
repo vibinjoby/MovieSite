@@ -7,7 +7,6 @@ import {
   Grid,
   Typography,
   Box,
-  Paper,
   Badge,
   Card
 } from "@material-ui/core";
@@ -33,7 +32,7 @@ export default function SearchType(props) {
   const { tv, movies, onSearchClick } = props;
   return (
     <div style={{ marginLeft: 50 }}>
-      <Grid container style={{ flexFlow: "column", width: "100%" }}>
+      <Grid container style={{ flexFlow: "column" }}>
         <Grid item>
           <Card className={classes.paper}>
             <List
