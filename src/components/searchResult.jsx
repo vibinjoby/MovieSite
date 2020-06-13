@@ -53,9 +53,13 @@ export default function SearchResult(props) {
   return (
     <div>
       {contents.map(content => (
-        <Grid container spacing={5} className={classes.container}>
+        <Grid
+          container
+          spacing={5}
+          className={classes.container}
+          key={content.id}
+        >
           <Card
-            key={content.id}
             elevation={5}
             className={classes.cardContainer}
             onClick={() =>

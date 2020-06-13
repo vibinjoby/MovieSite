@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import SearchResult from "./searchResult";
 import { getMultiSearchResults } from "../services/moviesService";
 import { makeStyles } from "@material-ui/core";
+import { Pagination } from "@material-ui/lab";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -19,6 +20,8 @@ const useStyles = makeStyles(theme => ({
 export default function SearchComponent(props) {
   const classes = useStyles();
   const [searchData, setSearchData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const search = props.match.params.query;
   let moviesArr = [];
   let tvShowsArr = [];
@@ -36,10 +39,16 @@ export default function SearchComponent(props) {
     setFilteredData(data);
   };
 
+  const handleClick = (event, value) => {
+    setSearchData([]);
+    setPage(value);
+  };
+
   useEffect(() => {
     async function getSearchData() {
-      const { results } = await getMultiSearchResults(search);
-      results.forEach((element, index, array) => {
+      const results = await getMultiSearchResults(search, page);
+      setTotalPages(results.total_pages);
+      results.results.forEach((element, index, array) => {
         if (element.media_type === "movie") {
           moviesArr.push(element);
         } else if (element.media_type === "tv") {
@@ -58,19 +67,28 @@ export default function SearchComponent(props) {
     if (searchData.length === 0) getSearchData();
   });
   return (
-    <Grid container className={classes.container} spacing={7}>
-      <Grid item>
-        <SearchType
-          movies={moviesData}
-          tv={tvData}
-          onSearchClick={handleSearchClick}
-        />
+    <React.Fragment>
+      <Grid container className={classes.container} spacing={7}>
+        <Grid item>
+          <SearchType
+            movies={moviesData}
+            tv={tvData}
+            onSearchClick={handleSearchClick}
+          />
+        </Grid>
+        <Grid item style={{ flexGrow: 2 }} md>
+          {searchData && (
+            <SearchResult
+              contents={searchData}
+              filteredData={filteredData}
+              page={page}
+            />
+          )}
+          <br />
+          <br />
+          <Pagination count={totalPages} page={page} onChange={handleClick} />
+        </Grid>
       </Grid>
-      <Grid item style={{ flexGrow: 2 }} md>
-        {searchData && (
-          <SearchResult contents={searchData} filteredData={filteredData} />
-        )}
-      </Grid>
-    </Grid>
+    </React.Fragment>
   );
 }
